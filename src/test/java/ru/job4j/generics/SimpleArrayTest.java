@@ -26,6 +26,7 @@ public class SimpleArrayTest {
         simpleArray.add(1);
         simpleArray.add(2);
         simpleArray.add(3);
+
         simpleArray.remove(1);
         assertThat(simpleArray.get(0), is(1));
         assertThat(simpleArray.get(1), is(3));
@@ -37,6 +38,7 @@ public class SimpleArrayTest {
         simpleArray.add(1);
         simpleArray.add(2);
         simpleArray.add(3);
+
         simpleArray.remove(2);
         assertThat(simpleArray.get(0), is(1));
         assertThat(simpleArray.get(1), is(2));
@@ -48,6 +50,7 @@ public class SimpleArrayTest {
         simpleArray.add(1);
         simpleArray.add(2);
         simpleArray.add(3);
+
         assertThat(simpleArray.get(0), is(1));
         assertThat(simpleArray.get(1), is(2));
         assertThat(simpleArray.get(2), is(3));
@@ -61,6 +64,7 @@ public class SimpleArrayTest {
         simpleArray.add(1);
         simpleArray.add(2);
         simpleArray.add(3);
+
         Iterator<Integer> simpleArrayIt = simpleArray.iterator();
         assertThat(simpleArrayIt.hasNext(), is(true));
         assertThat(simpleArrayIt.next(), is(1));

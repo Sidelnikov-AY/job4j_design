@@ -18,7 +18,6 @@ public class SimpleArray<T> implements Iterable<T> {
     public T get(int index) {
         Objects.checkIndex(index, size);
         return (T) array[index];
-
     }
 
     public void set(int index, T model) {
@@ -37,10 +36,12 @@ public class SimpleArray<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             int point = 0;
+
             @Override
             public boolean hasNext() {
                 return point < array.length;
             }
+
             @Override
             public T next() {
                 return (T)array[point++];
