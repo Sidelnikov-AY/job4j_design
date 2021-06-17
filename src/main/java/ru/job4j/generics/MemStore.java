@@ -3,7 +3,7 @@ package ru.job4j.generics;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class MemStore<T extends Base> implements Store<T> {
+public class MemStore<T extends Base> implements Store<T> {
 
     private final Map<String, T> mem = new HashMap<>();
 
