@@ -21,7 +21,7 @@ public class RoleStoreTest {
     }
 
     @Test
-    public void WhenAddModel() {
+    public void whenAddModel() {
         assertEquals(role1, roleStore.findById("1"));
         assertEquals(role2, roleStore.findById("2"));
         assertEquals(role3, roleStore.findById("3"));
@@ -29,24 +29,24 @@ public class RoleStoreTest {
     }
 
     @Test
-    public void WhenReplace() {
+    public void whenReplace() {
         roleStore.replace("3", role4);
         assertEquals(role4, roleStore.findById("4"));
         assertEquals(role4, roleStore.findById("4"));
     }
 
     @Test
-    public void WhenDelete() {
+    public void whenDelete() {
         assertTrue(roleStore.delete("4"));
     }
 
     @Test
-    public void WhenFindById() {
+    public void whenFindById() {
         assertEquals(role2, roleStore.findById("2"));
     }
 
     @Test
-    public void WhenFindNull() {
+    public void whenFindNull() {
         assertNull(roleStore.findById("5"));
     }
 

@@ -32,10 +32,11 @@ public class SimpleLinkedList<E> implements List<E> {
         final Node<E> l = last;
         final Node<E> newNode = new Node(l, value, null);
         last = newNode;
-        if (l == null)
+        if (l == null) {
             first = newNode;
-        else
+        } else {
             l.next = newNode;
+        }
         size++;
         modCount++;
     }
