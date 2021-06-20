@@ -36,6 +36,25 @@ public class ForwardLinked<T> implements Iterable<T> {
         return element;
     }
 
+    public T deleteLast() {
+        if (head.next == null) {
+            final T element = head.value;
+            head.value = null;
+            return element;
+        }
+
+        Node<T> temp = head;
+        Node<T> tail = null;
+        while (temp.next.next != null) {
+            temp = temp.next;
+       }
+        tail = temp.next;
+        final T element = tail.value;
+        tail.value = null;
+        temp.next = null;
+        return element;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
