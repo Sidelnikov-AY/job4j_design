@@ -44,7 +44,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public T next() {
-                return (T)array[point++];
+                return (T) array[point++];
             }
         };
     }

@@ -15,7 +15,7 @@ public class MemStore<T extends Base> implements Store<T> {
     @Override
     public boolean replace(String id, T model) {
         boolean contains = mem.containsKey(id);
-        if(contains) {
+        if (contains) {
             mem.replace(id, model);
             return true;
         }
