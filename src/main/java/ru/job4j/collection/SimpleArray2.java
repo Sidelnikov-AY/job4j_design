@@ -23,8 +23,9 @@ public class SimpleArray2<T> implements Iterable<T> {
     }
 
     public void add(T model) {
-        if (size >= container.length)
-            container = Arrays.copyOf(container, container.length + 1);
+        if (size >= container.length) {
+            container = Arrays.copyOf(container, container.length + 2);
+        }
         modCount++;
         container[size++] = model;
     }
@@ -42,13 +43,13 @@ public class SimpleArray2<T> implements Iterable<T> {
 
             @Override
             public T next() {
-                if(expectedModCount != modCount) {
+                if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return (T)container[point++];
+                return (T) container[point++];
             }
         };
     }
