@@ -24,7 +24,7 @@ public class MemStoreTest {
     }
 
     @Test
-    public void WhenAddModel() {
+    public void whenAddModel() {
         assertEquals(user1, memStore.findById("1"));
         assertEquals(user2, memStore.findById("2"));
         assertEquals(user3, memStore.findById("3"));
@@ -32,24 +32,24 @@ public class MemStoreTest {
     }
 
     @Test
-    public void WhenReplace() {
+    public void whenReplace() {
         memStore.replace("3", user4);
         assertEquals(user4, memStore.findById("4"));
         assertEquals(user4, memStore.findById("4"));
     }
 
     @Test
-    public void WhenDelete() {
+    public void whenDelete() {
         assertTrue(memStore.delete("4"));
     }
 
     @Test
-    public void WhenFindById() {
+    public void whenFindById() {
         assertEquals(user2, memStore.findById("2"));
     }
 
     @Test
-    public void WhenFindNull() {
+    public void whenFindNull() {
         assertNull(memStore.findById("5"));
     }
 
