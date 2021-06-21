@@ -24,7 +24,7 @@ public class SimpleArray2<T> implements Iterable<T> {
 
     public void add(T model) {
         if (size >= container.length) {
-            container = Arrays.copyOf(container, container.length + 2);
+            container = Arrays.copyOf(container, container.length * 2);
         }
         modCount++;
         container[size++] = model;
