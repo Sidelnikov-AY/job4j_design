@@ -13,6 +13,7 @@ public class ForwardLinkedTest {
     public void whenDeleteFirst() {
         ForwardLinked<Integer> linked = new ForwardLinked<>();
         linked.add(1);
+        assertThat(linked.getSize(), is(1));
         linked.deleteFirst();
         linked.iterator().next();
     }

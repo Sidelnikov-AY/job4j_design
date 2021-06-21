@@ -11,4 +11,8 @@ public class SimpleStack<T> {
         linked.addFirst(value);
 
     }
+
+    public boolean isEmpty() {
+        return linked.getSize() == 0;
+    }
 }
