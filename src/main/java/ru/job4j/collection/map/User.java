@@ -1,14 +1,19 @@
 package ru.job4j.collection.map;
 
-import java.sql.SQLOutput;
 import java.util.*;
-
-import static java.util.Objects.hash;
 
 public class User {
     private String name;
     private int children;
     private Calendar birthday;
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + children;
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        return result;
+    }
 
     public User(String name, int children, Calendar birthday) {
         this.name = name;
