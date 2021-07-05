@@ -19,10 +19,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean put(K key, V value) {
+        expand();
         if(get(key) != null) {
             return false;
         }
-        expand();
         int i = indexOf(key);
         table[i] = new MapEntry<>(key, value);
         modCount++;
@@ -46,7 +46,14 @@ public class SimpleMap<K, V> implements Map<K, V> {
     private void expand() {
         if ((float)count / capacity >= LOAD_FACTOR) {
             capacity *= 2;
-            table = Arrays.copyOf(table, capacity);
+            MapEntry<K, V>[] newTable = new MapEntry[capacity];
+            for (MapEntry<K, V> kvMapEntry : table) {
+                if (kvMapEntry != null) {
+                    int newIndex = indexOf(kvMapEntry.key);
+                    newTable[newIndex] = kvMapEntry;
+                }
+            }
+            table = newTable;
         }
     }
 
