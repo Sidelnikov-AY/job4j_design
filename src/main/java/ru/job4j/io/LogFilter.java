@@ -30,6 +30,10 @@ public class LogFilter {
 
     public static void main(String[] args) {
         List<String> log = filter("log.txt");
-        System.out.println(log);
+        for (String el: log
+             ) {
+            System.out.println(el);
+        }
+
     }
 }
