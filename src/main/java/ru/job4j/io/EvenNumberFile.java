@@ -12,7 +12,7 @@ public class EvenNumberFile {
            }
             String[] lines = text.toString().split(System.lineSeparator());
             for (String line : lines) {
-                int dig =Integer.parseInt(line);
+                int dig = Integer.parseInt(line);
                 String answer = (dig % 2 == 0) ? dig + " - " + "четное" : dig + " - " + "нечетное";
                 System.out.println(answer);
             }

@@ -16,13 +16,13 @@ public class Analize {
         }
         for (User user: current) {
             String temp = prev.get(user.getId());
-            if(temp == null) {
+            if (temp == null) {
                 added++;
             }
-            if((temp != null) && (!temp.equals(user.getName()))) {
+            if ((temp != null) && (!temp.equals(user.getName()))) {
                 changed++;
             }
-            if(prev.containsKey(user.getId())) {
+            if (prev.containsKey(user.getId())) {
                 count++;
             }
         }
