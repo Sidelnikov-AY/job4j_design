@@ -119,7 +119,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
             if (this == o) {
                 return true;
             }
-            if (o == null || getClass() != o.getClass()) return false;
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
             MapEntry<?, ?> mapEntry = (MapEntry<?, ?>) o;
             return key.equals(mapEntry.key);
         }

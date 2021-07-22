@@ -31,7 +31,7 @@ public class SimpleMapTest {
     }
 
     @Test
-    public void WhenRemoveCorrect() {
+    public void whenRemoveCorrect() {
         map = new SimpleMap<>();
         map.put(1, "one");
         map.put(2, "two");
@@ -42,7 +42,7 @@ public class SimpleMapTest {
     }
 
     @Test
-    public void WhenRemoveNotCorrect() {
+    public void whenRemoveNotCorrect() {
         map = new SimpleMap<>();
         map.put(1, "one");
         map.put(2, "two");
@@ -50,7 +50,7 @@ public class SimpleMapTest {
     }
 
     @Test
-    public void WhenExpandCorrect() {
+    public void whenExpandCorrect() {
         map = new SimpleMap<>();
         map.put(1, "one");
         map.put(2, "two");
@@ -65,7 +65,7 @@ public class SimpleMapTest {
 
 
     @Test
-    public void WhenIteratorCorrect() {
+    public void whenIteratorCorrect() {
         map = new SimpleMap<>();
         map.put(1, "one");
         map.put(2, "two");
@@ -76,7 +76,7 @@ public class SimpleMapTest {
     }
 
     @Test (expected = ConcurrentModificationException.class)
-    public void WhenIteratorThrowsConcurrentException() {
+    public void whenIteratorThrowsConcurrentException() {
         map = new SimpleMap<>();
         map.put(1, "one");
         Iterator<Integer> it = map.iterator();
