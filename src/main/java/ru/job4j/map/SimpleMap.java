@@ -20,7 +20,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean put(K key, V value) {
         expand();
-        if(get(key) != null) {
+        if (get(key) != null) {
             return false;
         }
         int i = indexOf(key);
@@ -44,7 +44,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private void expand() {
-        if ((float)count / capacity >= LOAD_FACTOR) {
+        if ((float) count / capacity >= LOAD_FACTOR) {
             capacity *= 2;
             MapEntry<K, V>[] newTable = new MapEntry[capacity];
             for (MapEntry<K, V> kvMapEntry : table) {
@@ -116,7 +116,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
+            if (this == o) {
+                return true;
+            }
             if (o == null || getClass() != o.getClass()) return false;
             MapEntry<?, ?> mapEntry = (MapEntry<?, ?>) o;
             return key.equals(mapEntry.key);
