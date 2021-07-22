@@ -2,6 +2,7 @@ package ru.job4j.io;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -19,10 +20,15 @@ public class Config {
             read.lines()
                     .filter(s -> s.contains("=") && !s.startsWith("#"))
                     .map(l -> l.split("="))
-                    .filter(l -> l.length == 2)
+                    .filter(l -> {
+                        if (l.length != 2) {
+                            throw new IllegalArgumentException();
+                        }
+                        return true;
+                    })
                     .forEach(s -> values.put(s[0].trim(), s[1].trim()));
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

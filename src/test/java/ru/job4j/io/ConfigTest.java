@@ -2,9 +2,6 @@ package ru.job4j.io;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
-
-import java.util.NoSuchElementException;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -28,7 +25,7 @@ public class ConfigTest {
         assertThat(config.value("hibernate.connection.password"), is("password"));
     }
 
-    @Test
+    @Test (expected = IllegalArgumentException.class)
         public void whenPairWithoutComment3() {
         String path = "./data/forConfigTest2.properties";
         Config config = new Config(path);
