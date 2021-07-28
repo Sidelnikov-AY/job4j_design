@@ -12,7 +12,7 @@ public class Dir {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
         for (File subfile : file.listFiles()) {
-            System.out.printf("%s : %s byte\n", subfile.getName(), subfile.length());
+            System.out.printf("%s : %s byte%n", subfile.getName(), subfile.length());
         }
     }
 }
