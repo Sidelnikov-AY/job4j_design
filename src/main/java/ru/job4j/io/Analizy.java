@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Analizy {
-    public Analizy(){
+    public Analizy() {
 
     };
     public void unavailable(String source, String target) {
@@ -29,7 +29,7 @@ public class Analizy {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(time.size() == 0) {
+        if (time.size() == 0) {
             return;
         }
         save(time, target);
