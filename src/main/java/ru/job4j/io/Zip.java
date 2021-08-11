@@ -37,19 +37,12 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
-        final Map<String, String> values = new HashMap<>();
-        for (String arg: args) {
-            String[] temp = arg.split("=");
-            if (temp.length != 2 || temp[0].isEmpty() || temp[1].isEmpty() || !temp[0].startsWith("-")) {
-                  throw new IllegalArgumentException("error when setting parameters");
-            }
-            values.put(temp[0].substring(1), temp[1]);
-        }
-        File source = new File(String.valueOf(Path.of(values.get("d"))));
+        ArgsName argsName = ArgsName.of(args);
+        File source = new File(String.valueOf(Path.of(argsName.get("d"))));
         if (source.isDirectory()) {
-            List<Path> sources = Search.search(Path.of(values.get("d")),
-                    p -> !p.toFile().getName().endsWith(values.get("e")));
-            packFiles(sources, Path.of(values.get("o")));
+            List<Path> sources = Search.search(Path.of(argsName.get("d")),
+                    p -> !p.toFile().getName().endsWith(argsName.get("e")));
+            packFiles(sources, Path.of(argsName.get("o")));
         }
         else {
             System.out.println("source directory does not exist");
