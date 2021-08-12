@@ -12,7 +12,7 @@ public class ConsoleChat {
 
     private final String path;
     private final String botAnswers;
-    List<String> log = new ArrayList<>();
+    private static List<String> log = new ArrayList<>();
     private static final String OUT = "закончить";
     private static final String STOP = "стоп";
     private static final String CONTINUE = "продолжить";
@@ -44,11 +44,13 @@ public class ConsoleChat {
                     checkStopContinue = true;
                 }
             } else {
-                System.out.println(generateAnswer(answers));
+                s = generateAnswer(answers);
+                System.out.println(s);
                 step = !step;
             }
             log.add(s);
         }
+        saveLog(path);
     }
 
     private static List<String> readPhrases(String path) {
@@ -61,13 +63,13 @@ public class ConsoleChat {
         return out;
     }
 
-    private static String generateAnswer (List<String> answersArray) {
+    private static String generateAnswer(List<String> answersArray) {
             Random rand = new Random();
             int randomIndex = rand.nextInt(answersArray.size());
             return answersArray.get(randomIndex);
     }
 
-    private void saveLog() {
+    private static void saveLog(String path) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(path, Charset.forName("UTF-8"), true))) {
             log.forEach(pw::println);
         } catch (IOException e) {
@@ -80,6 +82,5 @@ public class ConsoleChat {
     public static void main(String[] args) {
         ConsoleChat cc = new ConsoleChat("./src/main/java/ru/job4j/io/log.txt", "./src/main/java/ru/job4j/io/answers.txt");
         cc.run();
-        cc.saveLog();
     }
 }
