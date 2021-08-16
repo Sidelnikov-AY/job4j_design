@@ -3,9 +3,12 @@ package ru.job4j.io;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EchoServer {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+        final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
         final String exit = "Exit";
         final String hello = "Hello";
         final String what = "What";
@@ -31,7 +34,10 @@ public class EchoServer {
                     }
                     out.flush();
                 }
+
             }
+        } catch (Exception e) {
+            LOG.error("Exception in log example", e);
         }
     }
 }
