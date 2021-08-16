@@ -55,13 +55,14 @@ public class CSVReader {
 
     private void readSource() throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(inFile))) {
-            while (br.ready()) {
-                List<String> line = new ArrayList<>();
-                Scanner sc = new Scanner(br.readLine()).useDelimiter(delimiter);
+            String line;
+             while ((line = br.readLine()) != null) {
+                List<String> lineToArray = new ArrayList<>();
+                Scanner sc = new Scanner(new ByteArrayInputStream(line.getBytes())).useDelimiter(delimiter);
                 while (sc.hasNext()) {
-                    line.add(sc.next());
+                    lineToArray.add(sc.next());
                 }
-                input.add(line);
+                input.add(lineToArray);
             }
         } catch (Exception e) {
             e.printStackTrace();
