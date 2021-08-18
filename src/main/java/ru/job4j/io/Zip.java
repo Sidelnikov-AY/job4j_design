@@ -43,8 +43,7 @@ public class Zip {
             List<Path> sources = Search.search(Path.of(argsName.get("d")),
                     p -> !p.toFile().getName().endsWith(argsName.get("e")));
             packFiles(sources, Path.of(argsName.get("o")));
-        }
-        else {
+        } else {
             System.out.println("source directory does not exist");
         }
     }
