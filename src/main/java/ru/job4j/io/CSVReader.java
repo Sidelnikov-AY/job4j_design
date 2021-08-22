@@ -18,6 +18,7 @@ public class CSVReader {
     private static List<String> filterArray = new ArrayList<>();
     private static List<String> firstLine = new ArrayList<>();
     private static List<String> temp = new ArrayList<>();
+    private static List<String> result = new ArrayList<>();
 
 
     public CSVReader(String[] args) {
@@ -61,37 +62,44 @@ public class CSVReader {
                 firstLine.add(sc.next());
             }
             String line = br.readLine();
-             while (line != null) {
+            while (line != null) {
+
                 sc = new Scanner(line).useDelimiter(delimiter);
                 for (int i = 0; i < firstLine.size(); i++) {
                     temp.add(sc.next());
                 }
-                 writeResult();
+                String out = "";
+                 for (int i = 0; i < firstLine.size(); i++) {
+                     if (filterArray.contains(firstLine.get(i))) {
+                         out += String.format("%s,", temp.get(i));
+                     }
+
+                 }
                  temp.clear();
+                 result.add(out);
                  line = br.readLine();
             }
+            writeResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private static void writeResult() {
-            String out = "";
-            for (int i = 0; i < firstLine.size(); i++) {
-                if (filterArray.contains(firstLine.get(i))) {
-                    out += String.format("%s,", temp.get(i));
-                }
-        }
         if (outFile.equals("stdout")) {
-            System.out.println(out);
+            for (String line : result) {
+                System.out.println(line);
+            }
         } else {
-            saveFile(out, outFile);
+            saveFile(result, outFile);
         }
     }
 
-    private static void saveFile(String in, String path) {
+    private static void saveFile(List<String> in, String path) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(path, Charset.forName("UTF-8"), true))) {
-            pw.println(in);
+            for (String line: in) {
+                pw.println(line);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
