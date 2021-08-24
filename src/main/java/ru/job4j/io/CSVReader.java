@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CSVReader {
-    private String inFile;
+    private final String inFile;
     private String outFile;
     private String delimiter;
     private List<String> filterArray;
