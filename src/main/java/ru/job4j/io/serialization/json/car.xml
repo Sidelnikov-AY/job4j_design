@@ -1,0 +1,8 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<car isUsed = "true" year = "1990" model = "2109">
+    <engine turbo = "false" engineVolume = "1.5"/>
+    <options>
+    <option>leatherSeats</option>
+    <option>fogLights</option>
+    </options>
+</car>
