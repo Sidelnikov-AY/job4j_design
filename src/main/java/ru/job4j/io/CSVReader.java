@@ -10,73 +10,45 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CSVReader {
-    private final String inFile;
+    private String inFile;
     private String outFile;
     private String delimiter;
     private List<String> filterArray;
 
 
-    public CSVReader(String[] args) {
+    public CSVReader() { }
+
+    private void init(String[] args) {
         ArgsName argsName = ArgsName.of(args);
-        if (args.length != 4) {
+        if (argsName.size() != 4) {
             throw new IllegalArgumentException("Argument mismatch");
         }
-        this.inFile = readArgsIn(argsName);
-        this.outFile = readArgsOut(argsName);
-        this.delimiter = readArgsDelimiter(argsName);
-        this.filterArray = readArgsFilterArray(argsName);
-    }
 
-    public String getInFile() {
-        return inFile;
-    }
-
-    public String getOutFile() {
-        return outFile;
-    }
-
-    public String getDelimiter() {
-        return delimiter;
-    }
-
-    private String readArgsIn(ArgsName args) {
-        String inFile;
-        inFile = args.get("path");
+        inFile = argsName.get("path");
         Path checkFile = Path.of(inFile);
         if (!Files.exists(checkFile) || Files.isDirectory(checkFile)) {
-            System.out.println("wrong input file path");
+            throw new IllegalArgumentException("wrong input file path");
         }
-        return inFile;
-    }
 
-    private String readArgsOut(ArgsName args) {
-        outFile = args.get("out");
+        outFile = argsName.get("out");
         if (!outFile.equals("stdout")) {
-            Path checkFile = Path.of(outFile);
-            if (!Files.exists(checkFile) || Files.isDirectory(checkFile)) {
-                System.out.println("wrong output file path");
+            Path checkF = Path.of(outFile);
+            if (checkF == null || Files.isDirectory(checkF)) {
+                throw new IllegalArgumentException("wrong output file path");
             }
         }
-        return outFile;
-    }
 
-    private String readArgsDelimiter(ArgsName args) {
-        delimiter = args.get("delimiter");
+        delimiter = argsName.get("delimiter");
         if (delimiter == null) {
-            System.out.println("Wrong delimiter");
+            throw new IllegalArgumentException("wrong output file path");
         }
-        return delimiter;
-    }
 
-    private List<String> readArgsFilterArray(ArgsName args) {
-        String filter = args.get("filter");
-        if (filter != null) {
-            filterArray = List.of(filter.split(","));
-        } else {
-            System.out.println("no filter set");
-            filterArray = null;
+        String filter = argsName.get("filter");
+        if (filter == null) {
+            throw new IllegalArgumentException("wrong output file path");
         }
-        return filterArray;
+        filterArray = List.of(filter.split(","));
+
     }
 
     private List<String> getFirstLine(String inFile, String delimiter) throws IOException {
@@ -112,7 +84,8 @@ public class CSVReader {
         }
     }
 
-    private void writeResult(List<String> temp, String inFile, String outFile, List<String> filterArray, String delimiter) throws IOException {
+    private void writeResult(List<String> temp, String inFile, String outFile, List<String> filterArray,
+                             String delimiter) throws IOException {
             String out = "";
             for (int i = 0; i < getFirstLine(inFile, delimiter).size(); i++) {
                 if (filterArray.contains(getFirstLine(inFile, delimiter).get(i))) {
@@ -136,8 +109,9 @@ public class CSVReader {
 
 
     public static void main(String[] args) throws IOException {
-        CSVReader reader = new CSVReader(args);
-        reader.readSource(reader.getInFile(), reader.getOutFile(), reader.filterArray, reader.getDelimiter());
+        CSVReader reader = new CSVReader();
+        reader.init(args);
+        reader.readSource(reader.inFile, reader.outFile, reader.filterArray, reader.delimiter);
         // -path=./src/main/java/ru/job4j/io/in.csv -delimiter=";" -out=./src/main/java/ru/job4j/io/out.csv -filter=name,age
     }
 }
