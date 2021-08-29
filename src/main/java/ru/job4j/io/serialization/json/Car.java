@@ -2,7 +2,12 @@ package ru.job4j.io.serialization.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Car {
     private boolean isUsed;
@@ -19,6 +24,17 @@ public class Car {
         this.options = options;
     }
 
+    public boolean isUsed() {
+        return isUsed;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getModel() {
+        return model;
+    }
 
     @Override
     public String toString() {
@@ -47,5 +63,21 @@ public class Car {
 
         final Car vazFromJson = gson.fromJson(gson.toJson(vaz), Car.class);
         System.out.println(vazFromJson);
+
+        JSONObject jsonEngine = new JSONObject("{\"turbo\":\"false\", \"volume\":\"1.5\"}");
+        List<String> list = new ArrayList<>();
+        list.add("leather seats");
+        list.add("fog lights");
+        JSONArray jsonOptions = new JSONArray(list);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("isUsed", vaz.isUsed());
+        jsonObject.put("Year", vaz.getYear());
+        jsonObject.put("Model", vaz.getModel());
+        jsonObject.put("Engine", jsonEngine);
+        jsonObject.put("Options", jsonOptions);
+        System.out.println("==JSONObject==");
+        System.out.println(jsonObject.toString());
+        System.out.println(new JSONObject(vaz).toString());
     }
 }
