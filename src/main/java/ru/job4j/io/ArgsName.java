@@ -19,7 +19,7 @@ public class ArgsName {
         for (String arg: args) {
             String[] temp = arg.split("=");
             if (temp.length != 2 || temp[0].isEmpty() || temp[1].isEmpty() || !temp[0].startsWith("-")) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Incorrect argument:" + temp[0]);
             }
             values.put(temp[0].substring(1), temp[1]);
         }
