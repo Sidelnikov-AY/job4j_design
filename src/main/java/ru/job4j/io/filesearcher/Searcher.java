@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -54,31 +53,31 @@ public class Searcher {
         if (outputFile == null || Files.isDirectory(Path.of(outputFile))) {
             throw new IllegalArgumentException("Wrong output file path");
         }
- /*       System.out.println("All arguments are correct: " + System.lineSeparator()
-                + "-d=" + this.directory + System.lineSeparator()
-                + "-n=" + this.fileToSearch + System.lineSeparator()
-                + "-t=" + this.searchType + System.lineSeparator()
-                + "-o=" + this.outputFile);*/
     }
 
     private void searchByType() throws IOException {
         Path start = Paths.get(directory);
         Predicate<Path> condition = null;
         ArrayList<Path> paths = null;
-        if (searchType.equals("name")) {
-            condition = p -> p.toFile().getName().endsWith(fileToSearch);
-
-        } else if (searchType.equals("regex")) {
-            Pattern pattern = Pattern.compile(fileToSearch);
-            condition = p -> p.toFile().getName().matches(pattern.toString());
-        } else if (searchType.equals("mask")) {
-            String temp = fileToSearch.replaceAll("\\*", "(\\\\S\\*)");
-            temp = temp.replaceAll("\\?", "(\\\\S\\?)");
-            Pattern pattern = Pattern.compile(temp);
-            condition = p -> p.toFile().getName().matches(pattern.toString());
-            System.out.println(pattern);
+        Pattern pattern;
+        switch (searchType) {
+            case "name":
+                condition = p -> p.toFile().getName().equals(fileToSearch);
+                break;
+            case "regex":
+                pattern = Pattern.compile(fileToSearch);
+                condition = p -> pattern.matcher(p.toFile().getName()).find();
+                break;
+            case "mask":
+                String temp = fileToSearch.replaceAll("\\*", "(\\\\S\\*)");
+                temp = temp.replaceAll("\\?", "(\\\\S\\?)");
+                pattern = Pattern.compile(temp);
+                condition = p -> p.toFile().getName().matches(pattern.toString());
+                System.out.println(pattern);
+                break;
+            default:
+                System.out.println("Something went wrong");
         }
-
         paths = search(start, condition);
         save(outputFile, paths);
         System.out.println("Search completed");
