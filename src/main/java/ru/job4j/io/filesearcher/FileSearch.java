@@ -46,7 +46,7 @@ public class FileSearch implements FileVisitor<Path> {
         return CONTINUE;
     }
 
-    public ArrayList<Path> getPaths() {
+    public List<Path> getPaths() {
 
         return new ArrayList<>(paths);
     }

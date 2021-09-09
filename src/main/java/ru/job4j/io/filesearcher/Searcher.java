@@ -91,13 +91,11 @@ public class Searcher {
     }
 
     private void save(String outputFile, ArrayList<Path> paths) {
-        int i = 0;
         try (PrintWriter pw = new PrintWriter(new FileWriter(outputFile, Charset.forName("UTF-8"), true))) {
             for (Path path: paths) {
               pw.write(path.toString() + System.lineSeparator());
-              i += 1;
             }
-            System.out.println("Files found: " + i);
+            System.out.println("Files found: " + paths.size());
         } catch (IOException e) {
             e.printStackTrace();
         }
