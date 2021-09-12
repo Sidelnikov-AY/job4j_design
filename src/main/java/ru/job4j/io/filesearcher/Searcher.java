@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -90,10 +91,10 @@ public class Searcher {
         return searcher.getPaths();
     }
 
-    private void save(String outputFile, ArrayList<Path> paths) {
+    private void save(String outputFile, List<Path> paths) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(outputFile, Charset.forName("UTF-8"), true))) {
             for (Path path: paths) {
-              pw.write(path.toString() + System.lineSeparator());
+              pw.println(path.toString());
             }
             System.out.println("Files found: " + paths.size());
         } catch (IOException e) {
