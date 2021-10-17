@@ -108,8 +108,5 @@ public class Searcher {
         Searcher searcher = new Searcher(args);
         searcher.init(args);
         searcher.searchByType();
-
-        //-d=./src/main/java/ru/job4j/io/filesearcher -n=*.java -t=mask -o=./src/main/java/ru/job4j/io/filesearcher/out.csv
-
     }
 }

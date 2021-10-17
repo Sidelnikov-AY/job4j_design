@@ -112,6 +112,5 @@ public class CSVReader {
         CSVReader reader = new CSVReader();
         reader.init(args);
         reader.readSource(reader.inFile, reader.outFile, reader.filterArray, reader.delimiter);
-        // -path=./src/main/java/ru/job4j/io/in.csv -delimiter=";" -out=./src/main/java/ru/job4j/io/out.csv -filter=name,age
-    }
+     }
 }
