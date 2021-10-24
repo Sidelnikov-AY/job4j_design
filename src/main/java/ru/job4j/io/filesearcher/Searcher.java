@@ -103,7 +103,6 @@ public class Searcher {
 
     }
 
-
     public static void main(String[] args) throws IOException {
         Searcher searcher = new Searcher(args);
         searcher.init(args);
