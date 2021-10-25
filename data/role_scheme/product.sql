@@ -30,7 +30,7 @@ insert into type(name) values("МОЛОКО");
 insert into type(name) values("МОРОЖЕНОЕ");
 
 --1. Написать запрос получение всех продуктов с типом "СЫР"
-select * from product join type on type.name = 'СЫР';
+select p.name, t.name from product p join type t on p.type_id = t.id where t.name = 'СЫР';
 
 --2. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженое"
 select * from product where name like 'мороженое%';
@@ -49,7 +49,7 @@ select type.name, count(p.type_id) from product as p join type on type.id = p.ty
 group by type.name;
 
 --6. Написать запрос получение всех продуктов с типом "СЫР" и "МОЛОКО"
-select * from product join type on type.name = 'СЫР' or type.name = 'МОЛОКО';
+select p.name, t.name from product p join type t on p.type_id = t.id where t.name = 'СЫР' or t.name = 'МОЛОКО';
 
 --7. Написать запрос, который выводит тип продуктов, которых осталось меньше 10 штук. Под количеством подразумевается количество продуктов определенного типа. Например, если есть тип "СЫР" и продукты "Сыр плавленный" и "Сыр моцарелла", которые ему принадлежат, то количество продуктов типа "СЫР" будет 2.
 select type.name, count(p.type_id) from product as p join type on type.id = p.type_id
